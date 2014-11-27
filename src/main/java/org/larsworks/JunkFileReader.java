@@ -3,10 +3,7 @@ package org.larsworks;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * @author Lars Kleen
@@ -16,7 +13,12 @@ import java.util.TreeSet;
  */
 public class JunkFileReader {
 
-    private static final String FILENAME = "junk.txt";
+    private static final List<String> files = new ArrayList<>();
+
+    static {
+        files.add("junk1.txt");
+        files.add("junk2.txt");
+    }
 
     public SortedSet<String> whitelist() {
         SortedSet<String> whitelist = new TreeSet<>();
@@ -60,7 +62,15 @@ public class JunkFileReader {
         whitelist.add("gmail.com");
         whitelist.add("buhl-vertragskunden.de");
         whitelist.add("buhl-newsletter.de");
+        whitelist.add("fanatec-shop.com");
+        whitelist.add("xing.com");
         whitelist.add("aol.com");
+        whitelist.add("aol.com");
+        whitelist.add("aol.com");
+        whitelist.add("aol.com");
+
+
+
 
         return whitelist;
     }
@@ -71,9 +81,11 @@ public class JunkFileReader {
 
         Set<String> spamDomains = new TreeSet<String>();
 
-        InputStream is = getClass().getClassLoader().getResourceAsStream(FILENAME);
-        BufferedReader br = new BufferedReader(new InputStreamReader(is));
-        br.lines().forEach((String line) -> spamDomains.add(parser.parse(line)));
+        files.forEach((String filename) -> {
+            InputStream is = getClass().getClassLoader().getResourceAsStream(filename);
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            br.lines().forEach((String line) -> spamDomains.add(parser.parse(line)));
+        });
 
         spamDomains.removeAll(whitelist());
         spamDomains.forEach((String line) -> output.write(line));
@@ -81,3 +93,5 @@ public class JunkFileReader {
     }
 
 }
+
+
