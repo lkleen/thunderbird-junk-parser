@@ -19,7 +19,7 @@ public class Parser {
                 String domain = line.substring(startIndex, endIndex);
                 return domain;
             } catch (StringIndexOutOfBoundsException e) {
-                System.err.println("COULD NOT PÜARSE: " + line);
+                System.err.println("COULD NOT PARSE: " + line);
                 return line;
             }
         } else {
