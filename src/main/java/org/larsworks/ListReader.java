@@ -1,5 +1,6 @@
 package org.larsworks;
 
+import java.util.Collection;
 import java.util.Set;
 
 /**
@@ -8,8 +9,8 @@ import java.util.Set;
  *        Date: 07.12.14
  *        Time: 15:22
  */
-public interface ListReader {
+public interface ListReader<T> {
 
-    public Set<String> read(Set<String> lines);
+    public Collection<T> read(Set<String> lines);
 
 }

@@ -1,9 +1,6 @@
 package org.larsworks;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * @author Lars Kleen
@@ -13,24 +10,29 @@ import java.util.TreeSet;
  */
 public class Main {
 
+    static final String WHITELIST_FILE = "whitelist.txt";
+
     public static void main (String... args) {
 
         List<String> blacklistFiles = new ArrayList<>();
         blacklistFiles.add("junk1.txt");
         blacklistFiles.add("junk2.txt");
+        blacklistFiles.add("junk3.txt");
 
         FileReader fileReader = new FileReader();
         BlacklistReader blacklistReader = new BlacklistReader();
         WhitelistReader whitelistReader = new WhitelistReader();
 
-        Set<String> blacklist = new TreeSet<>();
+        DomainList blacklist = new DomainList();
+        DomainList whiteList = whitelistReader.read(fileReader.readFile(WHITELIST_FILE));
 
         blacklistFiles.forEach((String filename) -> blacklist.addAll(blacklistReader.read(fileReader.readFile(filename))));
-        blacklist.removeAll(whitelistReader.read(fileReader.readFile("whitelist.txt")));
+        blacklist.removeAllEndsWith(whiteList);
 
         Output output = new Output();
 
-        blacklist.forEach((String line) -> output.write(line));
+        SortedSet<Domain> domains = new TreeSet<>(blacklist);
+        domains.forEach((Domain domain) -> output.write(domain.domain));
     }
 
 

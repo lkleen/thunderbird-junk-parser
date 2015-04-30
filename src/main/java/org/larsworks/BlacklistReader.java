@@ -9,13 +9,19 @@ import java.util.TreeSet;
  *        Date: 07.12.14
  *        Time: 15:25
  */
-public class BlacklistReader implements ListReader {
+public class BlacklistReader implements ListReader<Domain> {
 
     @Override
-    public Set<String> read(Set<String> lines) {
-        Set<String> set = new TreeSet<>();
+    public Set<Domain> read(Set<String> lines) {
+        Set<Domain> set = new TreeSet<>();
         Parser parser = new Parser();
-        lines.forEach((String line) -> set.add(parser.parse(line)));
+
+        lines.forEach((String line) -> {
+            String domain = parser.parse(line);
+            if (domain.length() > 0) {
+                set.add(new Domain(domain));
+            }
+        });
         return set;
     }
 }

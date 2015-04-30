@@ -2,6 +2,7 @@ amazon.com
 aol.com
 apple.com
 battle.net
+berlin-direktversicherung.de
 bigpoint.com
 buhl-newsletter.de
 buhl-vertragskunden.de
@@ -24,11 +25,16 @@ google.com
 heroku.com
 immobilienscout24.de
 immonet.de
+juraforum.de
+lautsprechershop.de
 linkedin.com
 lvl-hessen.de
+mail.ebay-kleinanzeigen.de
 more-thing.com
 netbuild.net
+net-server.de
 newslecker.lieferheld.de
+paypal.de
 redhat.com
 response.sourceforge.com
 service.eventim.de

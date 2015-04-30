@@ -9,11 +9,11 @@ import java.util.TreeSet;
  *        Date: 07.12.14
  *        Time: 15:27
  */
-public class WhitelistReader implements ListReader {
+public class WhitelistReader implements ListReader<Domain> {
     @Override
-    public Set<String> read(Set<String> lines) {
-        Set<String> set = new TreeSet<>();
-        lines.forEach((String line) -> set.add(line.trim()));
-        return set;
+    public DomainList read(Set<String> lines) {
+        DomainList list = new DomainList();
+        lines.forEach((String line) -> list.add(new Domain(line.trim())));
+        return list;
     }
 }
