@@ -11,12 +11,15 @@ import java.util.regex.Pattern;
  */
 public class Parser {
 
+    private static final String BOUNCE = "bounce.";
+
     String parse (String line) {
         if (line.startsWith("Return-Path:")) {
             int startIndex = line.indexOf("@") + 1;
             int endIndex = line.indexOf(">");
             try {
                 String domain = line.substring(startIndex, endIndex);
+                domain = removeBounce(domain);
                 return domain;
             } catch (StringIndexOutOfBoundsException e) {
                 System.err.println("COULD NOT PARSE: " + line);
@@ -25,6 +28,10 @@ public class Parser {
         } else {
             return "";
         }
+    }
+
+    String removeBounce(String domain) {
+        return domain.startsWith(BOUNCE) ? domain.replaceAll(BOUNCE, "") : domain;
     }
 
 }
